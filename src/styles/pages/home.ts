@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface BackgroundProps {
-  backgroundImage: string;
+  backgroundImage?: string;
 }
 
 export const BackgroundImage = styled.main<BackgroundProps>`
@@ -73,5 +73,48 @@ export const WidgetContent = styled.div`
   ul {
     list-style: none;
     padding: 0;
+  }
+
+  form {
+    margin-top: 22px;
+
+    input,
+    button {
+      appearance: none;
+    }
+
+    input {
+      background-color: ${({ theme }) => theme.colors.mainBg};
+      border-radius: ${({ theme }) => theme.borderRadius};
+      border: solid 1px ${({ theme }) => theme.colors.inputBorder};
+      color: ${({ theme }) => theme.colors.contrastText};
+      height: 40px;
+      width: 100%;
+      padding: 0 16px;
+
+      &::placeholder {
+        color: ${({ theme }) => theme.colors.inputText};
+      }
+    }
+
+    button {
+      background-color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.contrastText};
+      cursor: pointer;
+      height: 36px;
+      border: 0;
+      border-radius: ${({ theme }) => theme.borderRadius};
+      transition: background-color 300ms ease;
+      margin-top: 24px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:disabled {
+        background-color: ${({ theme }) => theme.colors.disabled};
+        cursor: not-allowed;
+      }
+    }
   }
 `;
