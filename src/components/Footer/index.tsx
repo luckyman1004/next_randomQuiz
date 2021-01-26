@@ -1,4 +1,5 @@
-import { FooterWrapper } from "@/styles/components/footer";
+import React from 'react';
+import { FooterWrapper } from '@/styles/components/footer';
 
 export default function Footer(props) {
   return (
@@ -10,7 +11,7 @@ export default function Footer(props) {
         />
       </a>
       <p>
-        Criado durante a{" "}
+        Criado durante a{' '}
         <a href="https://www.alura.com.br/">
           <span>Imersão React da Alura</span>
         </a>
