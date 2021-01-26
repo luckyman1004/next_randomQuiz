@@ -1,4 +1,4 @@
-import db from "../../db.json";
+import Head from "next/head";
 
 import {
   BackgroundImage,
@@ -10,6 +10,8 @@ import {
 
 import Footer from "@/components/Footer";
 import GitHubCorner from "@/components/GitHubCorner";
+
+import db from "../../db.json";
 
 export default function Home() {
   return (
