@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface BackgroundProps {
   backgroundImage: string;
@@ -39,10 +39,11 @@ export const Widget = styled.aside`
     line-height: 1;
     margin-bottom: 0;
   }
+
   p {
     font-size: 14px;
     font-weight: 400;
-    line-height: 1;
+    line-height: 1.4;
   }
 `;
 
@@ -58,7 +59,7 @@ export const WidgetHeader = styled.header`
   }
 `;
 
-export const WidgetContent = styled.header`
+export const WidgetContent = styled.div`
   padding: 24px 32px 32px 32px;
 
   & > *:first-child {
