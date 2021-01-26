@@ -1,7 +1,8 @@
-import { ThemeProvider } from "styled-components";
-import { defaultTheme } from "@/styles/theme";
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { defaultTheme } from '@/styles/theme';
 
-import GlobalStyle from "@/styles/global";
+import GlobalStyle from '@/styles/global';
 
 // import db from "../../db.json";
 

@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import { ThemeType } from "../../src/pages/_app";
+import { createGlobalStyle } from 'styled-components';
+import { ThemeType } from '../pages/_app';
 
 type Props = {
   theme: ThemeType;
@@ -9,7 +9,7 @@ export default createGlobalStyle<Props>`
   * {
     box-sizing: border-box;
   }
-  
+
   body {
     color: ${({ theme }) => theme.colors.contrastText};
     display: flex;
@@ -18,11 +18,11 @@ export default createGlobalStyle<Props>`
     margin: 0;
     padding: 0;
   }
-  
+
   html, body {
     min-height: 100vh;
   }
-  
+
   #__next {
     flex: 1;
     display: flex;

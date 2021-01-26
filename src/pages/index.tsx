@@ -1,4 +1,4 @@
-import Head from "next/head";
+import React from 'react';
 
 import {
   BackgroundImage,
@@ -6,12 +6,12 @@ import {
   Widget,
   WidgetHeader,
   WidgetContent,
-} from "@/styles/pages/home";
+} from '@/styles/pages/home';
 
-import Footer from "@/components/Footer";
-import GitHubCorner from "@/components/GitHubCorner";
+import Footer from '@/components/Footer';
+import GitHubCorner from '@/components/GitHubCorner';
 
-import db from "../../db.json";
+import db from '../../db.json';
 
 export default function Home() {
   return (
