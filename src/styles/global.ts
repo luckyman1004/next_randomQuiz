@@ -1,6 +1,11 @@
 import { createGlobalStyle } from "styled-components";
+import { ThemeType } from "../../src/pages/_app";
 
-export default createGlobalStyle`
+type Props = {
+  theme: ThemeType;
+};
+
+export default createGlobalStyle<Props>`
   * {
     box-sizing: border-box;
   }
