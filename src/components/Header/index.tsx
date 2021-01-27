@@ -6,7 +6,7 @@ import { HeaderWrapper } from '@/styles/components/header';
 export default function Header(props) {
   return (
     <HeaderWrapper {...props}>
-      <Link href="./">
+      <Link href="/">
         <a>
           <img src="/random-quiz.png" alt="Random Quiz" />
         </a>
