@@ -78,12 +78,7 @@ export const WidgetContent = styled.div`
   form {
     margin-top: 22px;
 
-    input,
-    button {
-      appearance: none;
-    }
-
-    input {
+    /* input {
       background-color: ${({ theme }) => theme.colors.mainBg};
       border-radius: ${({ theme }) => theme.borderRadius};
       border: solid 1px ${({ theme }) => theme.colors.inputBorder};
@@ -95,9 +90,10 @@ export const WidgetContent = styled.div`
       &::placeholder {
         color: ${({ theme }) => theme.colors.inputText};
       }
-    }
+    } */
 
     button {
+      appearance: none;
       background-color: ${({ theme }) => theme.colors.primary};
       color: ${({ theme }) => theme.colors.contrastText};
       cursor: pointer;
