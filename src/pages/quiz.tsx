@@ -13,6 +13,7 @@ import {
   WidgetContent,
   WidgetTopic,
 } from '@/styles/pages/home';
+import { WidgetLoading } from '@/styles/pages/quiz';
 
 import db from '../../db.json';
 
@@ -31,7 +32,11 @@ function Loading() {
   return (
     <Widget>
       <WidgetHeader>Loading...</WidgetHeader>
-      <WidgetContent>spinner?</WidgetContent>
+      <WidgetContent>
+        <WidgetLoading>
+          <img src="loading-ripple.gif" alt="loading" />
+        </WidgetLoading>
+      </WidgetContent>
     </Widget>
   );
 }
@@ -43,14 +48,23 @@ function QuestionWidget({
   playerName,
   onSubmit,
 }) {
+  const [selectedAlternative, setSelectedAlternative] = useState(undefined);
+  const [isQuestionSubmited, setIsQuestionSubmited] = useState(false);
   const questionId = `question__${questionIndex}`;
+  const isCorrect = selectedAlternative === question.answer;
+  const hasAlternativeSelected = selectedAlternative !== undefined;
 
   function handleCheckAnswer(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    console.log(e.target);
+    setIsQuestionSubmited(true);
 
-    onSubmit();
+    setSelectedAlternative(undefined);
+
+    setTimeout(() => {
+      setIsQuestionSubmited(false);
+      onSubmit();
+    }, 3 * 1000);
   }
 
   return (
@@ -79,8 +93,8 @@ function QuestionWidget({
 
         <form onSubmit={handleCheckAnswer}>
           {question.alternatives.map(
-            (alternative: React.ReactNode, index: never) => {
-              const alternativeId = `alternative__${index}`;
+            (alternative: React.ReactNode, alternativeIndex: never) => {
+              const alternativeId = `alternative__${alternativeIndex}`;
 
               return (
                 <WidgetTopic
@@ -88,7 +102,12 @@ function QuestionWidget({
                   as="label"
                   htmlFor={alternativeId}
                 >
-                  <input id={alternativeId} name={questionId} type="radio" />
+                  <input
+                    id={alternativeId}
+                    name={questionId}
+                    type="radio"
+                    onChange={() => setSelectedAlternative(alternativeIndex)}
+                  />
                   {` `}
                   {alternative}
                 </WidgetTopic>
@@ -98,7 +117,14 @@ function QuestionWidget({
 
           {/* <pre>{JSON.stringify(question, null, 4)}</pre> */}
 
-          <button type="submit">CONFIRMAR</button>
+          <button type="submit" disabled={!hasAlternativeSelected}>
+            CONFIRMAR
+          </button>
+
+          {isQuestionSubmited && isCorrect && <p>Você acertou!</p>}
+          {isQuestionSubmited && !isCorrect && <p>Você errou!</p>}
+
+          <p>{selectedAlternative}</p>
         </form>
       </WidgetContent>
     </Widget>

@@ -24,6 +24,7 @@ export const QuizContainer = styled.section`
 `;
 
 export const Widget = styled.aside`
+  animation: 1000ms ease-out 0s 1 fadeIn;
   background-color: ${({ theme }) => theme.colors.mainBg};
   border-radius: ${({ theme }) => theme.borderRadius};
   border: 1px solid ${({ theme }) => theme.colors.primary};
