@@ -28,4 +28,14 @@ export default createGlobalStyle<Props>`
     display: flex;
     flex-direction: column;
   }
+
+  // animations
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
