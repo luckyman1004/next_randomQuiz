@@ -1,6 +1,11 @@
 import React, { FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import GitHubCorner from '@/components/GitHubCorner';
+import Input from '@/components/Input';
+
 import {
   BackgroundImage,
   QuizContainer,
@@ -8,11 +13,6 @@ import {
   WidgetHeader,
   WidgetContent,
 } from '@/styles/pages/home';
-
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import GitHubCorner from '@/components/GitHubCorner';
-import Input from '@/components/Input';
 
 import db from '../../db.json';
 
