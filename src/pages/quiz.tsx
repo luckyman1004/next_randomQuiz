@@ -13,7 +13,7 @@ import {
   WidgetContent,
   WidgetTopic,
 } from '@/styles/pages/home';
-import { WidgetLoading } from '@/styles/pages/quiz';
+import { WidgetLoading, AlternativesForm } from '@/styles/pages/quiz';
 
 import db from '../../db.json';
 
@@ -92,18 +92,23 @@ function QuestionWidget({
           {question.description}, <strong>{playerName}</strong> 🌚
         </p>
 
-        <form onSubmit={handleCheckAnswer}>
+        <AlternativesForm onSubmit={handleCheckAnswer}>
           {question.alternatives.map(
             (alternative: React.ReactNode, alternativeIndex: never) => {
               const alternativeId = `alternative__${alternativeIndex}`;
+              const alternativeStatus = isCorrect ? 'SUCCESS' : 'ERROR';
+              const isSeleted = selectedAlternative === alternativeIndex;
 
               return (
                 <WidgetTopic
                   key={alternativeId}
                   as="label"
                   htmlFor={alternativeId}
+                  data-selected={isSeleted}
+                  data-status={isQuestionSubmited && alternativeStatus}
                 >
                   <input
+                    style={{ display: 'none' }}
                     id={alternativeId}
                     name={questionId}
                     type="radio"
@@ -126,7 +131,7 @@ function QuestionWidget({
           {isQuestionSubmited && !isCorrect && <p>Você errou!</p>}
 
           {/* <p>{selectedAlternative}</p> */}
-        </form>
+        </AlternativesForm>
       </WidgetContent>
     </Widget>
   );
