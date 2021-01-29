@@ -8,7 +8,7 @@ export default function Header(props) {
     <HeaderWrapper {...props}>
       <Link href="/">
         <a>
-          <img src="/random-quiz.png" alt="Random Quiz" />
+          <img src="random-quiz.png" alt="Random Quiz" />
         </a>
       </Link>
     </HeaderWrapper>

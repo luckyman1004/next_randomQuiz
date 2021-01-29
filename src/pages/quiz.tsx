@@ -47,11 +47,12 @@ function QuestionWidget({
   questionIndex,
   playerName,
   onSubmit,
+  addResult,
 }) {
   const [selectedAlternative, setSelectedAlternative] = useState(undefined);
   const [isQuestionSubmited, setIsQuestionSubmited] = useState(false);
   const questionId = `question__${questionIndex}`;
-  const isCorrect = selectedAlternative === question.answer;
+  const isCorrect = selectedAlternative == question.answer;
   const hasAlternativeSelected = selectedAlternative !== undefined;
 
   function handleCheckAnswer(e: FormEvent<HTMLFormElement>) {
@@ -59,11 +60,11 @@ function QuestionWidget({
 
     setIsQuestionSubmited(true);
 
-    setSelectedAlternative(undefined);
-
     setTimeout(() => {
-      setIsQuestionSubmited(false);
+      addResult(isCorrect);
       onSubmit();
+      setIsQuestionSubmited(false);
+      setSelectedAlternative(undefined);
     }, 3 * 1000);
   }
 
@@ -124,8 +125,46 @@ function QuestionWidget({
           {isQuestionSubmited && isCorrect && <p>Você acertou!</p>}
           {isQuestionSubmited && !isCorrect && <p>Você errou!</p>}
 
-          <p>{selectedAlternative}</p>
+          {/* <p>{selectedAlternative}</p> */}
         </form>
+      </WidgetContent>
+    </Widget>
+  );
+}
+
+function ResultWidget({ results, playerName }) {
+  return (
+    <Widget>
+      <WidgetHeader>
+        <h1>🎉 Parabéns {playerName}</h1>
+      </WidgetHeader>
+      <WidgetContent>
+        <p>
+          Você acertou{' '}
+          {results.reduce((accumulator: number, currentValue: boolean) => {
+            const isHit = currentValue === true;
+
+            if (isHit) return accumulator + 1;
+
+            return accumulator;
+          }, 0)}{' '}
+          questões, confira seu resultado:
+        </p>
+
+        {/* <p>
+          Você acertou {results.filter((x) => x).length} questões, confira seu
+          resultado:
+        </p> */}
+        <ul>
+          {results.map((result: boolean, index: never) => {
+            const resultId = `${index + 1}`;
+            return (
+              <li key={resultId}>
+                #{resultId} Resultado: {result === true ? ' Acertou' : ' Errou'}
+              </li>
+            );
+          })}
+        </ul>
       </WidgetContent>
     </Widget>
   );
@@ -140,11 +179,16 @@ const screenStates = {
 export default function Quiz() {
   const router = useRouter();
   const [screenState, setScreenState] = useState(screenStates.LOADING);
+  const [results, setResults] = useState([]);
   const totalQuestions = db.questions.length;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const questionIndex = currentQuestion;
   const question = db.questions[questionIndex];
   const playerName = router.query.name;
+
+  function addResult(result: any) {
+    setResults([...results, result]);
+  }
 
   useEffect(() => {
     setTimeout(() => {
@@ -175,6 +219,7 @@ export default function Quiz() {
               totalQuestions={totalQuestions}
               playerName={playerName}
               onSubmit={handleQuizSubmit}
+              addResult={addResult}
             />
 
             <Footer />
@@ -184,10 +229,7 @@ export default function Quiz() {
         {screenState === screenStates.LOADING && <Loading />}
 
         {screenState === screenStates.RESULT && (
-          <Widget>
-            <WidgetHeader>Parabéns {playerName} 🎉</WidgetHeader>
-            <WidgetContent>Você acertou X questões, parabéns!</WidgetContent>
-          </Widget>
+          <ResultWidget results={results} playerName={playerName} />
         )}
       </QuizContainer>
 
