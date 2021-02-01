@@ -12,6 +12,7 @@ import {
   Widget,
   WidgetHeader,
   WidgetContent,
+  WidgetTopic,
 } from '@/styles/pages/home';
 
 import db from '../../db.json';
@@ -62,6 +63,27 @@ export default function Home() {
               Dá uma olhada nesses <i>quizes</i> incríveis que o pessoal fez na
               Imersão React Next.js da Alura:
             </p>
+            <ul>
+              {db.external.map((externalLink) => {
+                const [projectName, githubUser] = externalLink
+                  .replace(/\//g, '')
+                  .replace('https:', '')
+                  .replace('.vercel.app', '')
+                  .split('.');
+
+                return (
+                  <li key={externalLink}>
+                    <WidgetTopic
+                      href={externalLink}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {projectName}/{githubUser}
+                    </WidgetTopic>
+                  </li>
+                );
+              })}
+            </ul>
           </WidgetContent>
         </Widget>
 

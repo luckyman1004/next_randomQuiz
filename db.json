@@ -21,7 +21,10 @@
       ]
     }
   ],
-  "external": [""],
+  "external": [
+    "https://random-quiz.jpcmf.vercel.app/",
+    "https://aluraquiz-css.omariosouto.vercel.app/"
+  ],
   "theme": {
     "colors": {
       "primary": "#0d47a1",

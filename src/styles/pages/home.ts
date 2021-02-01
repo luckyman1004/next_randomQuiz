@@ -74,6 +74,14 @@ export const WidgetContent = styled.div`
   ul {
     list-style: none;
     padding: 0;
+
+    li {
+      line-height: 1.8;
+
+      a {
+        color: ${({ theme }) => theme.colors.secondary};
+      }
+    }
   }
 
   form {
