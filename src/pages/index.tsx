@@ -1,5 +1,6 @@
 import React, { FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -32,7 +33,16 @@ export default function Home() {
       <QuizContainer>
         <Header />
 
-        <Widget>
+        <Widget
+          as={motion.section}
+          transition={{ delay: 0, duration: 0.5 }}
+          variants={{
+            show: { opacity: 1, y: '0' },
+            hidden: { opacity: 0, y: '100%' },
+          }}
+          initial="hidden"
+          animate="show"
+        >
           <WidgetHeader>
             <h1>Desenvolvimento Web</h1>
           </WidgetHeader>
@@ -57,7 +67,16 @@ export default function Home() {
           </WidgetContent>
         </Widget>
 
-        <Widget>
+        <Widget
+          as={motion.section}
+          transition={{ delay: 0.3, duration: 0.3 }}
+          variants={{
+            show: { opacity: 1 },
+            hidden: { opacity: 0 },
+          }}
+          initial="hidden"
+          animate="show"
+        >
           <WidgetContent>
             <h1>Quizes da galera</h1>
             <p>
