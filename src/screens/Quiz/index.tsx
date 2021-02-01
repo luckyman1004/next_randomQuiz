@@ -14,19 +14,9 @@ import {
   WidgetTopic,
 } from '@/styles/pages/home';
 import { WidgetLoading, AlternativesForm } from '@/styles/pages/quiz';
+import BackLinkArrow from '@/components/BackLinkArrow';
 
-import db from '../../db.json';
-
-// interface Question {
-//   image: string;
-//   title: string;
-//   description: string;
-//   answer: boolean;
-//   alternatives: [];
-// }
-// interface Questions {
-//   questions: Question[];
-// }
+// import db from '../../../db.json';
 
 function Loading() {
   return (
@@ -34,7 +24,7 @@ function Loading() {
       <WidgetHeader>Loading...</WidgetHeader>
       <WidgetContent>
         <WidgetLoading>
-          <img src="loading-ripple.gif" alt="loading" />
+          <img src="/loading-ripple.gif" alt="loading" />
         </WidgetLoading>
       </WidgetContent>
     </Widget>
@@ -52,7 +42,7 @@ function QuestionWidget({
   const [selectedAlternative, setSelectedAlternative] = useState(undefined);
   const [isQuestionSubmited, setIsQuestionSubmited] = useState(false);
   const questionId = `question__${questionIndex}`;
-  const isCorrect = selectedAlternative == question.answer;
+  const isCorrect = selectedAlternative === question.answer;
   const hasAlternativeSelected = selectedAlternative !== undefined;
 
   function handleCheckAnswer(e: FormEvent<HTMLFormElement>) {
@@ -71,6 +61,7 @@ function QuestionWidget({
   return (
     <Widget>
       <WidgetHeader>
+        <BackLinkArrow href="/" />
         <h1>
           Pergunta {questionIndex + 1} de {totalQuestions}
         </h1>
@@ -181,15 +172,16 @@ const screenStates = {
   RESULT: 'RESULT',
 };
 
-export default function Quiz() {
+export default function Quiz({ externalQuestions, externalBg }) {
   const router = useRouter();
   const [screenState, setScreenState] = useState(screenStates.LOADING);
   const [results, setResults] = useState([]);
-  const totalQuestions = db.questions.length;
+  const totalQuestions = externalQuestions.length;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const questionIndex = currentQuestion;
-  const question = db.questions[questionIndex];
+  const question = externalQuestions[questionIndex];
   const playerName = router.query.name;
+  const bg = externalBg;
 
   function addResult(result: any) {
     setResults([...results, result]);
@@ -212,7 +204,7 @@ export default function Quiz() {
   }
 
   return (
-    <BackgroundImage backgroundImage={db.bg}>
+    <BackgroundImage backgroundImage={bg}>
       <QuizContainer>
         <Header />
 

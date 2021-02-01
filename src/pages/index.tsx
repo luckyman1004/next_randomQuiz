@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import GitHubCorner from '@/components/GitHubCorner';
 import Input from '@/components/Input';
+import Link from '@/components/Link';
 
 import {
   BackgroundImage,
@@ -74,8 +75,9 @@ export default function Home() {
                 return (
                   <li key={externalLink}>
                     <WidgetTopic
-                      href={externalLink}
-                      target="_blank"
+                      as={Link}
+                      href={`/quiz/${projectName}___${githubUser}`}
+                      // target="_blank"
                       rel="noreferrer"
                     >
                       {projectName}/{githubUser}
